@@ -1,16 +1,12 @@
 console.log('this is loaded')
  
-var Twitter = require('twitter');
-console.log(Twitter)
-var Spotify = require('spotify');
-console.log(Spotify)
 
 
 exports.twitter = {
   consumer_key: process.env.TWITTER_CONSUMER_KEY,
   consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
-  access_token_key: '961388854249971714-rVip7RrYCAb6a2ZOL19HS9bwX2tyJRU',
-  access_token_secret: 'yfKc0o3xHDd5XYkRWJyjboNgllb6ttqVHjCk4LiiVXqiE'
+  access_token_key: process.env.TWITTER_ACCESS_TOKEN_KEY,
+  access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
 };
 
 exports.spotify = {
