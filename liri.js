@@ -4,11 +4,12 @@ require("dotenv").config();
 var Twitter = require('twitter');
 var Spotify = require('spotify-web-api-js');
 var request = require('request')
-var inquirer = require('inquirer')
+var inquirer = require('inquirer');
+var fs = require('fs');
 
 var command = process.argv[2];
 var search = process.argv[2];
-console.log(command)
+// console.log(command)
 
 
 var keys = require('./keys.js')
@@ -43,7 +44,7 @@ inquirer.prompt([
             {
             type: 'input',
             name: 'query',
-            message: 'What would you like to search for?'    
+            message: 'What title you like to search for?'    
             }
         ]).then(function(answer){
             console.log(answer.search)
@@ -58,6 +59,11 @@ inquirer.prompt([
     }
 })
 
+function logResponse(content){
+    fs.appendFile('log.txt', content, function(err){
+        console.log(err || 'Content Added')
+    })
+}
 
 function tweets(){
     var params = {screen_name: 'Account for Class'}
@@ -70,6 +76,7 @@ function tweets(){
         else {
             for(var i = 0; i<tweets.length; i++){
                 console.log(tweets[i].text)
+                logResponse(tweets[i].text)
             }
         }; 
 
@@ -94,6 +101,7 @@ function movie(search){
     } else { 
         var movie = JSON.parse(body)
         console.log(movie)
+        logResponse(JSON.stringify(movie))
     }
 });
 }
