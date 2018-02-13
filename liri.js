@@ -10,16 +10,14 @@ console.log(command)
 
 var keys = require('./keys.js')
 
-console.log(keys.twitter)
+console.log(keys.spotify)
 
 //var spotify = new Spotify(keys.spotify)
 //console.log(spotify)
 var twitter = new Twitter(keys.twitter)
 //How does the twitter constructor work
-console.log('full twitter console log', twitter)
 
-var command = process.argv[2];
-console.log(command)
+// var spotify = new Spotify(keys.spotify)
 
 
 if(command==='my-tweets'){
@@ -37,4 +35,12 @@ if(command==='my-tweets'){
         }; 
 
     });
+}
+var spotifyKey = keys.spotify.id
+if(command==='spotify-this'){
+
+    Spotify.lookup({search: 'track', spotifyKey}, function(err, data){
+        console.log(err || data)
+        console.log(data)
+    })
 }
