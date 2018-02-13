@@ -23,9 +23,18 @@ console.log(command)
 
 
 if(command==='my-tweets'){
+    var params = {screen_name: 'Account for Class'}
     //not sure how get works
     //not sure how the parameters are being passed into the function
-    twitter.get('search/show/:id', function(error, tweets, response) {
-        console.log('console logged tweets', tweets); 
+    twitter.get('statuses/user_timeline', params, function(error, tweets, response) {
+       
+        
+        if(error){console.log(error)}
+        else {
+            for(var i = 0; i<tweets.length; i++){
+                console.log(tweets[i].text)
+            }
+        }; 
+
     });
 }
