@@ -2,7 +2,7 @@ require("dotenv").config();
 //What does .config() do?
 
 var Twitter = require('twitter');
-var Spotify = require('spotify-web-api-js');
+var Spotify = require('node-spotify-api');
 var request = require('request')
 var inquirer = require('inquirer');
 var fs = require('fs');
@@ -13,8 +13,13 @@ var search = process.argv[2];
 
 
 var keys = require('./keys.js')
-
-var s = new Spotify()
+console.log(keys.twitter)
+console.log(keys.spotify)
+var spotify = new Spotify({
+    id: process.env.SPOTIFY_ID,
+    secret: process.env.SPOTIFY_SECRET
+})
+console.log(spotify)
 // var spotifyApi = new SpotifyWebApi();
 
 // console.log(keys.spotify)
@@ -22,6 +27,7 @@ var s = new Spotify()
 //var spotify = new Spotify(keys.spotify)
 //console.log(spotify)
 var twitter = new Twitter(keys.twitter)
+console.log(twitter)
 //How does the twitter constructor work
 
 // var spotify = new Spotify(keys.spotify)
@@ -83,24 +89,31 @@ function tweets(){
     });
 }
 
-// spotifyApi.setAccessToken(`${keys.spotify.id}`)
-
-// function spotify(search){ 
-//     spotifyApi.searchTracks('love')
-//         .then(function(data){
-//             console.log
-//         }, function(error){
-//             console.log(error)
-//         })
-// }
-
+function spotify(search){ 
+    console.log(keys.spotify)
+    spotify
+  .search({ type: 'track', query: 'All the Small Things' })
+  .then(function(response) {
+    console.log(response);
+  })
+  .catch(function(err) {
+    console.log(err);
+  });
+}
 function movie(search){
     request(`http://www.omdbapi.com/?t=${search}&apikey=trilogy`, function (error, response, body){
     if(error){
         console.log(error)
     } else { 
         var movie = JSON.parse(body)
-        console.log(movie)
+        console.log(`### ${movie.Title} ### 
+            \n - Released in ${movie.Year} 
+            \n - IMDB Rating: ${movie.imdbRating} 
+            \n - Rotten Tomatoes Rating: ${movie.Ratings}
+            \n - Country of Production: ${movie.Country}
+            \n - Language: ${movie.Laguage}
+            \n - Plot: ${movie.Plot}
+            \n - Actors: ${movie.Actors}`)
         logResponse(JSON.stringify(movie))
     }
 });
