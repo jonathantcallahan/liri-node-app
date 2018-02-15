@@ -12,14 +12,12 @@ var search = process.argv[2];
 // console.log(command)
 
 
-var keys = require('./keys.js')
-console.log(keys.twitter)
-console.log(keys.spotify)
+var keys = require('./keys.js')  
 var spotify = new Spotify({
     id: process.env.SPOTIFY_ID,
     secret: process.env.SPOTIFY_SECRET
 })
-console.log(spotify)
+
 // var spotifyApi = new SpotifyWebApi();
 
 // console.log(keys.spotify)
@@ -27,7 +25,6 @@ console.log(spotify)
 //var spotify = new Spotify(keys.spotify)
 //console.log(spotify)
 var twitter = new Twitter(keys.twitter)
-console.log(twitter)
 //How does the twitter constructor work
 
 // var spotify = new Spotify(keys.spotify)
@@ -59,6 +56,7 @@ inquirer.prompt([
                 movie(answer.query)
             }
             if(searchTerm==='Song Data'){
+                console.log('balls')
                 spotify(answer.query)
             }
         })
@@ -90,7 +88,7 @@ function tweets(){
 }
 
 function spotify(search){ 
-    console.log(keys.spotify)
+    console.log('balls 2')
     spotify
   .search({ type: 'track', query: 'All the Small Things' })
   .then(function(response) {
@@ -109,9 +107,9 @@ function movie(search){
         console.log(`### ${movie.Title} ### 
             \n - Released in ${movie.Year} 
             \n - IMDB Rating: ${movie.imdbRating} 
-            \n - Rotten Tomatoes Rating: ${movie.Ratings}
+            \n - Rotten Tomatoes Rating: ${movie.Ratings[1].Value}
             \n - Country of Production: ${movie.Country}
-            \n - Language: ${movie.Laguage}
+            \n - Language: ${movie.Language}
             \n - Plot: ${movie.Plot}
             \n - Actors: ${movie.Actors}`)
         logResponse(JSON.stringify(movie))
