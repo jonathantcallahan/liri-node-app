@@ -61,7 +61,6 @@ inquirer.prompt([
 
 function logResponse(content){
     fs.appendFile('log.txt', content, function(err){
-        console.log(err || 'Content Added')
     })
 }
 
@@ -75,8 +74,9 @@ function tweets(){
         if(error){console.log(error)}
         else {
             for(var i = 0; i<tweets.length; i++){
-                console.log(tweets[i].text)
+                console.log(`* ${tweets[i].created_at} Tweet: ${tweets[i].text}`)
                 logResponse(tweets[i].text)
+             
             }
         }; 
 
