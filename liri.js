@@ -56,8 +56,7 @@ inquirer.prompt([
                 movie(answer.query)
             }
             if(searchTerm==='Song Data'){
-                console.log('balls')
-                spotify(answer.query)
+                spotifySearch(answer.query)
             }
         })
     }
@@ -87,8 +86,27 @@ function tweets(){
     });
 }
 
-function spotify(search){ 
-    console.log('balls 2')
+
+// function spotifySearch(search){
+//     spotify.search(
+//         {
+//           type: "track",
+//           query: search
+//         },
+//         function(err, data) {
+//           if (err) {
+//             console.log("Error occurred: " + err);
+//             return;
+//           }
+    
+//           var songs = data.tracks.items;
+//           console.log(songs);
+//         }
+//       );
+// }
+
+
+function spotifySearch(search){ 
     spotify
   .search({ type: 'track', query: 'All the Small Things' })
   .then(function(response) {
