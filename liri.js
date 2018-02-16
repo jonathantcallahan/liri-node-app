@@ -87,35 +87,40 @@ function tweets(){
 }
 
 
-// function spotifySearch(search){
-//     spotify.search(
-//         {
-//           type: "track",
-//           query: search
-//         },
-//         function(err, data) {
-//           if (err) {
-//             console.log("Error occurred: " + err);
-//             return;
-//           }
+function spotifySearch(search){
+    spotify.search(
+        {
+          type: "track",
+          query: search
+        },
+        function(err, data) {
+          if (err) {
+            console.log("Error occurred: " + err);
+            return;
+          }
     
-//           var songs = data.tracks.items;
-//           console.log(songs);
-//         }
-//       );
+          var songs = data.tracks.items;
+          console.log(songs);
+        }
+      );
+}
+
+
+// function spotifySearch(search){ 
+//     spotify
+//   .search({ 
+//     type: 'track', 
+//     query: 'All the Small Things' 
+//     })
+//   .then(function(response) {
+//     console.log(response);
+//   })
+//   .catch(function(err) {
+//     console.log(err);
+//   });
 // }
 
 
-function spotifySearch(search){ 
-    spotify
-  .search({ type: 'track', query: 'All the Small Things' })
-  .then(function(response) {
-    console.log(response);
-  })
-  .catch(function(err) {
-    console.log(err);
-  });
-}
 function movie(search){
     request(`http://www.omdbapi.com/?t=${search}&apikey=trilogy`, function (error, response, body){
     if(error){
